@@ -1,0 +1,20 @@
+---
+import Base from '../layouts/Base.astro';
+import { withBase } from '../utils/paths';
+---
+<Base title="Page Not Found">
+  <div class="not-found">
+    <div class="not-found-inner">
+      <div class="not-found-num">404</div>
+      <h1>Page not found</h1>
+      <p>The page you are looking for seems to have wandered off the path.</p>
+      <a href={withBase('/')} class="btn btn--primary">Return home</a>
+    </div>
+  </div>
+</Base>
+
+<style>
+  .not-found { min-height: 65vh; display: flex; align-items: center; justify-content: center; text-align: center; }
+  .not-found-inner h1 { font-family: var(--font-heading); font-size: var(--font-size-3xl); font-weight: 400; margin-bottom: 1rem; }
+  .not-found-inner p { color: var(--color-text-muted); margin-bottom: 2rem; }
+</style>

@@ -1,0 +1,55 @@
+---
+import { withBase } from '../../utils/paths';
+
+interface Props {
+  siteConfig: any;
+}
+const { siteConfig } = Astro.props;
+const contact = siteConfig.contact || {};
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+
+      <div class="footer-brand-col">
+        <div class="footer-brand">{siteConfig.site.title}</div>
+        <p class="footer-tagline">
+          A non-sectarian centre for meditation and contemplative practice,<br />
+          open to all, rooted in kindness.
+        </p>
+        <address class="footer-address">
+          {contact.address && <span>{contact.address}<br /></span>}
+          {contact.phone  && <span><a href={`tel:${contact.phone}`}>{contact.phone}</a><br /></span>}
+          {contact.email  && <span><a href={`mailto:${contact.email}`}>{contact.email}</a></span>}
+        </address>
+      </div>
+
+      <div>
+        <p class="footer-heading">Programs</p>
+        <ul class="footer-links">
+          <li><a href={withBase('/programs/')}>All Programs</a></li>
+          <li><a href={withBase('/programs/intro-to-meditation/')}>Intro to Meditation</a></li>
+          <li><a href={withBase('/programs/compassion-training/')}>The Compassionate Heart</a></li>
+          <li><a href={withBase('/programs/drop-in-meditation/')}>Thursday Drop-In</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="footer-heading">Centre</p>
+        <ul class="footer-links">
+          <li><a href={withBase('/about/')}>About Us</a></li>
+          <li><a href={withBase('/teachers/')}>Our Teachers</a></li>
+          <li><a href={withBase('/events/')}>Events &amp; Retreats</a></li>
+          <li><a href={withBase('/contact/')}>Visit &amp; Contact</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <span>© {year} {siteConfig.site.title}. All rights reserved.</span>
+      <span>Built with <a href="https://getjinpa.com">Jinpa</a></span>
+    </div>
+  </div>
+</footer>

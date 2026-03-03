@@ -1,0 +1,94 @@
+---
+import Page from '../layouts/Page.astro';
+---
+<Page
+  title="Our Teachers"
+  heroTitle="Our Teachers"
+  heroSubtitle="Stillwater's teachers bring decades of practice and study across multiple Buddhist traditions."
+>
+  <section class="section">
+    <div class="container">
+      <div class="teachers-list">
+
+        <div class="teacher-profile">
+          <div class="teacher-profile-img">
+            <img
+              src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=400&q=80"
+              alt="Sarah Morrison"
+              loading="lazy"
+            />
+          </div>
+          <div class="teacher-profile-body">
+            <h2>Sarah Morrison</h2>
+            <p class="teacher-role">Senior Teacher &amp; Founder</p>
+            <p>
+              Sarah has practised and studied within the Tibetan Buddhist tradition for
+              over twenty-five years, with extended periods of training in India and Nepal.
+              She holds a deep connection with both the Kagyu and Nyingma lineages and has
+              completed two three-year retreats under the guidance of senior Tibetan masters.
+            </p>
+            <p>
+              Sarah is known for her ability to make the subtlest teachings accessible to
+              contemporary Western students. She draws on both classical texts and her own
+              sustained experience to offer teachings that are precise, warm, and immediately
+              useful. She founded Stillwater in 2019 with the intention of creating a
+              genuinely welcoming home for contemplative practice in the Hudson Valley.
+            </p>
+            <p>
+              When she is not teaching, Sarah leads silent retreats and writes on the
+              relationship between meditation and mental health.
+            </p>
+          </div>
+        </div>
+
+        <div class="teacher-profile">
+          <div class="teacher-profile-img">
+            <img
+              src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&q=80"
+              alt="David Chen"
+              loading="lazy"
+            />
+          </div>
+          <div class="teacher-profile-body">
+            <h2>David Chen</h2>
+            <p class="teacher-role">Meditation Instructor</p>
+            <p>
+              David came to meditation through his work as a clinical psychologist, where
+              he observed first-hand the profound effects of mindfulness-based interventions
+              on mental health. Seeking a deeper foundation, he spent five years studying with
+              teachers in the Tibetan Gelug tradition and later trained in Soto Zen with
+              teachers in Japan and the United States.
+            </p>
+            <p>
+              David brings a unique perspective that bridges the contemplative and scientific
+              traditions. His teaching style is practical, evidence-informed, and rooted in
+              a genuine appreciation of the classical sources. He leads Stillwater's
+              Introduction to Meditation and Mindful Living courses, and is particularly
+              skilled at working with those who come to practice through an interest in
+              mental health and wellbeing.
+            </p>
+            <p>
+              David also leads mindfulness programmes for healthcare professionals and
+              community organisations throughout the Hudson Valley.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</Page>
+
+<style>
+  .teachers-list { display: flex; flex-direction: column; gap: 5rem; }
+  .teacher-profile { display: grid; grid-template-columns: 260px 1fr; gap: 3.5rem; align-items: start; }
+  .teacher-profile-img { border-radius: var(--radius-xl); overflow: hidden; aspect-ratio: 3/4; }
+  .teacher-profile-img img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+  .teacher-profile-body h2 { font-family: var(--font-heading); font-size: var(--font-size-3xl); font-weight: 500; margin-bottom: 0.25rem; }
+  .teacher-role { font-size: var(--font-size-xs); font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-primary); margin-bottom: 1.5rem; }
+  .teacher-profile-body p { font-size: var(--font-size-base); color: var(--color-text-muted); line-height: 1.8; }
+  @media (max-width: 768px) {
+    .teacher-profile { grid-template-columns: 1fr; }
+    .teacher-profile-img { max-width: 200px; }
+  }
+</style>

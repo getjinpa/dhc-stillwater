@@ -1,0 +1,35 @@
+---
+import Head from '../components/core/Head.astro';
+import Header from '../components/core/Header.astro';
+import Footer from '../components/core/Footer.astro';
+import { siteConfig } from '../utils/config';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  type?: 'website' | 'article';
+}
+
+const { title, description, image, type = 'website' } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <Head
+      title={title}
+      description={description || siteConfig.site.description}
+      image={image}
+      type={type}
+      {siteConfig}
+    />
+  </head>
+  <body>
+    <Header {siteConfig} />
+    <main>
+      <slot />
+    </main>
+    <Footer {siteConfig} />
+  </body>
+</html>

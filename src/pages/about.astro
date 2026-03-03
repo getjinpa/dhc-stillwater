@@ -1,0 +1,111 @@
+---
+import Page from '../layouts/Page.astro';
+import { withBase } from '../utils/paths';
+---
+<Page
+  title="About"
+  heroTitle="About Stillwater"
+  heroSubtitle="A non-sectarian centre for meditation and contemplative practice in the heart of the Hudson Valley."
+>
+  <section class="section">
+    <div class="container">
+      <div class="about-layout">
+
+        <div class="prose">
+          <h2>Our Mission</h2>
+          <p>
+            Stillwater Dharma Center exists to make genuine contemplative practice
+            accessible to everyone. We offer teachings and courses rooted in the Buddhist
+            tradition — particularly in meditation and compassion training — in a form that
+            is clear, practical, and relevant to contemporary life.
+          </p>
+          <p>
+            We believe that the ability to find stillness within the mind, and to develop
+            genuine warmth toward ourselves and others, is not a luxury but a necessity —
+            and that these capacities can be cultivated through training.
+          </p>
+
+          <h2>Our Approach: Rimé</h2>
+          <p>
+            Rimé — the Tibetan word for "non-sectarian" — is not a new tradition but a
+            spirit of open inquiry and respect for multiple lineages of wisdom. At
+            Stillwater we draw from Tibetan Buddhist traditions (Kagyu, Nyingma, Gelug),
+            Zen, and Theravada, offering what is most helpful without insisting that any
+            one path is the only way.
+          </p>
+          <p>
+            You do not need to be a Buddhist, or hold any particular belief, to practise
+            with us. The techniques we teach are universal. What matters is the sincerity
+            of your intention to look inward and to cultivate kindness.
+          </p>
+
+          <h2>Meditation &amp; Wellbeing</h2>
+          <p>
+            Research over the past three decades has confirmed what practitioners have
+            known for centuries: meditation and compassion training genuinely help.
+            Studies show significant reductions in stress, anxiety, and depression;
+            improvements in focus, emotional regulation, and sleep; and measurable
+            increases in wellbeing and prosocial behaviour.
+          </p>
+          <p>
+            Our courses are informed by this research and are taught in a way that
+            meets people where they are — whether they come seeking relief from stress,
+            greater clarity, deeper meaning, or simply a community of like-minded people.
+          </p>
+
+          <h2>Our Space</h2>
+          <p>
+            Our centre sits on a quiet property on the edge of Woodstock, surrounded by
+            mature trees and the sounds of the forest. The main meditation hall seats up
+            to thirty practitioners and is equipped with cushions, benches, and chairs.
+            The space is simple, warm, and conducive to practice.
+          </p>
+          <p>
+            We are accessible by car from across the Hudson Valley and from New York City.
+            See our <a href={withBase('/contact/')}>contact and directions page</a> for details.
+          </p>
+        </div>
+
+        <aside class="about-sidebar">
+          <div class="infobox">
+            <p class="infobox-title">Centre Information</p>
+            <dl>
+              <dt>Founded</dt>      <dd>2019</dd>
+              <dt>Location</dt>    <dd>Woodstock, NY</dd>
+              <dt>Tradition</dt>   <dd>Rimé (non-sectarian)</dd>
+              <dt>Language</dt>    <dd>English</dd>
+              <dt>Access</dt>      <dd>Ground floor, wheelchair accessible</dd>
+            </dl>
+          </div>
+          <div class="infobox" style="margin-top:1.5rem">
+            <p class="infobox-title">Weekly Schedule</p>
+            <dl>
+              <dt>Thursday</dt> <dd>Drop-in sitting 6–7:30pm</dd>
+              <dt>Courses</dt>  <dd>See programmes page</dd>
+              <dt>Retreats</dt> <dd>Quarterly</dd>
+            </dl>
+          </div>
+          <div style="margin-top:1.5rem">
+            <a href={withBase('/programs/')} class="btn btn--primary" style="width:100%;justify-content:center">
+              View all programs
+            </a>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </section>
+</Page>
+
+<style>
+  .about-layout {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 4rem;
+    align-items: start;
+  }
+  @media (max-width: 900px) {
+    .about-layout { grid-template-columns: 1fr; }
+    .about-sidebar { order: -1; }
+  }
+</style>

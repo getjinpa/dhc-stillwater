@@ -1,0 +1,23 @@
+---
+import Base from './Base.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  heroTitle?: string;
+  heroSubtitle?: string;
+}
+
+const { title, description, heroTitle, heroSubtitle } = Astro.props;
+---
+<Base {title} {description}>
+  {(heroTitle || heroSubtitle) && (
+    <section class="page-hero">
+      <div class="container">
+        {heroTitle && <h1>{heroTitle}</h1>}
+        {heroSubtitle && <p>{heroSubtitle}</p>}
+      </div>
+    </section>
+  )}
+  <slot />
+</Base>

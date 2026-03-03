@@ -1,0 +1,59 @@
+---
+import { withBase, stripBase } from '../../utils/paths';
+
+interface Props {
+  siteConfig: any;
+}
+const { siteConfig } = Astro.props;
+const pathname = stripBase(Astro.url.pathname);
+const navItems = siteConfig.navigation?.main || [];
+---
+<header class="site-header">
+  <div class="container">
+    <div class="header-inner">
+
+      <a href={withBase('/')} class="site-logo">
+        {siteConfig.site.title}
+        <span>Woodstock, NY</span>
+      </a>
+
+      <nav class="site-nav" aria-label="Main navigation">
+        <ul class="nav-links" id="nav-links">
+          {navItems.map((item: any) => (
+            <li>
+              <a
+                href={withBase(item.url)}
+                class:list={['nav-link', { active: pathname === item.url || (item.url !== '/' && pathname.startsWith(item.url)) }]}
+              >
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+        <a href={withBase('/programs/')} class="btn btn--primary nav-cta">Explore Programs</a>
+        <button class="nav-mobile-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <line x1="2" y1="5" x2="20" y2="5" />
+            <line x1="2" y1="11" x2="20" y2="11" />
+            <line x1="2" y1="17" x2="20" y2="17" />
+          </svg>
+        </button>
+      </nav>
+
+    </div>
+  </div>
+</header>
+
+<script>
+  function initNav() {
+    const toggle = document.getElementById('nav-toggle');
+    const links  = document.getElementById('nav-links');
+    if (!toggle || !links) return;
+    toggle.addEventListener('click', () => {
+      const open = links.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(open));
+    });
+  }
+  initNav();
+  document.addEventListener('astro:after-swap', initNav);
+</script>

@@ -1,0 +1,103 @@
+---
+import Page from '../../layouts/Page.astro';
+import { getCollection, render } from 'astro:content';
+import { withBase } from '../../utils/paths';
+
+export async function getStaticPaths() {
+  const programs = await getCollection('programs');
+  return programs.map(p => ({
+    params: { slug: p.id },
+    props:  { program: p },
+  }));
+}
+
+const { program } = Astro.props;
+const { Content } = await render(program);
+const d = program.data;
+
+const levelLabel: Record<string, string> = {
+  'beginner': 'Beginner-friendly', 'all-levels': 'All levels',
+  'intermediate': 'Intermediate',  'advanced': 'Advanced',
+};
+---
+<Page title={d.title} description={d.description}>
+  <article>
+    {d.image && (
+      <div class="program-hero-img">
+        <img src={d.image} alt={d.image_alt || d.title} loading="eager" />
+      </div>
+    )}
+
+    <section class="section">
+      <div class="container">
+        <div class="program-layout">
+
+          <div>
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+              <a href={withBase('/')}>Home</a>
+              <span class="breadcrumb-sep" aria-hidden="true">›</span>
+              <a href={withBase('/programs/')}>Programs</a>
+              <span class="breadcrumb-sep" aria-hidden="true">›</span>
+              <span aria-current="page">{d.title}</span>
+            </nav>
+
+            <header class="program-header">
+              <span class="card-tag">{d.format}</span>
+              <h1>{d.title}</h1>
+              {d.subtitle && <p class="program-subtitle">{d.subtitle}</p>}
+              <p class="program-intro">{d.description}</p>
+            </header>
+
+            <div class="prose">
+              <Content />
+            </div>
+          </div>
+
+          <aside class="program-aside">
+            <div class="infobox">
+              <p class="infobox-title">Course Details</p>
+              <dl>
+                {d.format   && <><dt>Format</dt>   <dd>{d.format}</dd></>}
+                {d.schedule && <><dt>Schedule</dt> <dd>{d.schedule}</dd></>}
+                {d.duration && <><dt>Duration</dt> <dd>{d.duration}</dd></>}
+                {d.level    && <><dt>Level</dt>    <dd>{levelLabel[d.level]}</dd></>}
+                {d.price    && <><dt>Cost</dt>     <dd>{d.price}</dd></>}
+              </dl>
+            </div>
+
+            <div class="register-box">
+              <h3>Register</h3>
+              <p>To register or ask questions, get in touch with us directly.</p>
+              <a href={withBase('/contact/')} class="btn btn--primary register-btn">
+                Contact us to register
+              </a>
+              <p class="register-note">Sliding scale and scholarships available for all courses.</p>
+            </div>
+          </aside>
+
+        </div>
+      </div>
+    </section>
+  </article>
+</Page>
+
+<style>
+  .program-hero-img { height: 380px; overflow: hidden; }
+  .program-hero-img img { width: 100%; height: 100%; object-fit: cover; object-position: center 40%; }
+  .program-layout { display: grid; grid-template-columns: 1fr 300px; gap: 4rem; align-items: start; }
+  .program-header { margin-bottom: 2.5rem; }
+  .program-header h1 { font-size: var(--font-size-4xl); margin: 0.5rem 0 1rem; }
+  .program-subtitle { font-style: italic; color: var(--color-text-muted); font-size: var(--font-size-lg); margin: 0 0 1rem; }
+  .program-intro { font-size: var(--font-size-lg); color: var(--color-text-muted); margin: 0; line-height: 1.7; }
+  .program-aside { position: sticky; top: calc(var(--header-height) + 2rem); }
+  .register-box { margin-top: 1.5rem; padding: 1.5rem; background: var(--color-surface); border-radius: var(--radius-lg); }
+  .register-box h3 { font-family: var(--font-heading); font-size: var(--font-size-xl); margin-bottom: 0.5rem; }
+  .register-box p { font-size: var(--font-size-sm); color: var(--color-text-muted); margin-bottom: 0; }
+  .register-btn { width: 100%; justify-content: center; margin: 0.75rem 0 0.5rem; }
+  .register-note { font-size: 0.72rem !important; margin-top: 0.5rem !important; }
+  @media (max-width: 900px) {
+    .program-layout { grid-template-columns: 1fr; }
+    .program-aside { position: static; }
+    .program-hero-img { height: 260px; }
+  }
+</style>

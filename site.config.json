@@ -1,0 +1,30 @@
+{
+  "site": {
+    "title": "Stillwater Dharma Center",
+    "description": "A non-sectarian meditation and dharma center in Woodstock, NY. Courses in meditation and compassion training open to all.",
+    "url": "https://username.github.io",
+    "basePath": "",
+    "language": "en"
+  },
+  "contact": {
+    "address": "28 River Bend Lane, Woodstock, NY 12498",
+    "phone": "(845) 555-0174",
+    "email": "info@stillwaterdharma.org",
+    "hours": "Mon–Fri 10am–6pm · Sat–Sun 9am–5pm"
+  },
+  "navigation": {
+    "main": [
+      { "label": "Home",     "url": "/" },
+      { "label": "About",    "url": "/about/" },
+      { "label": "Programs", "url": "/programs/" },
+      { "label": "Events",   "url": "/events/" },
+      { "label": "Teachers", "url": "/teachers/" },
+      { "label": "Contact",  "url": "/contact/" }
+    ]
+  },
+  "seo": {
+    "titleTemplate": "%s — Stillwater Dharma Center",
+    "ogImage": ""
+  },
+  "jinpaKey": ""
+}

@@ -1,0 +1,248 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import { withBase } from '../utils/paths';
+import { siteConfig } from '../utils/config';
+
+const allPrograms = await getCollection('programs');
+const featuredPrograms = allPrograms
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 3);
+
+const allEvents = await getCollection('events');
+const now = new Date();
+const upcomingEvents = allEvents
+  .filter(e => new Date(e.data.date) >= now)
+  .sort((a, b) => new Date(a.data.date).getTime() - new Date(b.data.date).getTime())
+  .slice(0, 3);
+
+function fmtDate(d: Date) {
+  return {
+    day:   d.toLocaleDateString('en-US', { day: 'numeric' }),
+    month: d.toLocaleDateString('en-US', { month: 'short' }),
+  };
+}
+
+const typeLabel: Record<string, string> = {
+  retreat: 'Retreat', workshop: 'Workshop', talk: 'Talk',
+  sitting: 'Meditation', study: 'Study Group',
+};
+---
+<Base title={siteConfig.site.title} description={siteConfig.site.description}>
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero">
+    <div class="hero-bg">
+      <img
+        src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1600&q=80"
+        alt="Sunlit forest path in the Hudson Valley"
+        loading="eager"
+        fetchpriority="high"
+      />
+    </div>
+    <div class="container">
+      <div class="hero-content">
+        <span class="hero-eyebrow">Woodstock · Hudson Valley · New York</span>
+        <h1>Find stillness.<br />Cultivate compassion.<br />Live fully.</h1>
+        <p>
+          We offer meditation courses and contemplative practice rooted in
+          Buddhist wisdom — simple, accessible, and open to everyone.
+        </p>
+        <div class="hero-actions">
+          <a href={withBase('/programs/')} class="btn btn--primary">Explore Programs</a>
+          <a href={withBase('/about/')} class="btn btn--outline-white">Our Approach</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ PILLARS ═══ -->
+  <section class="welcome-strip">
+    <div class="container">
+      <div class="welcome-strip-inner">
+        <div class="welcome-item">
+          <div class="welcome-icon" aria-hidden="true">
+            <svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <circle cx="13" cy="13" r="10"/><circle cx="13" cy="13" r="3" fill="currentColor" stroke="none"/>
+              <line x1="13" y1="3" x2="13" y2="7"/><line x1="13" y1="19" x2="13" y2="23"/>
+              <line x1="3" y1="13" x2="7" y2="13"/><line x1="19" y1="13" x2="23" y2="13"/>
+            </svg>
+          </div>
+          <h3>Meditation</h3>
+          <p>Simple, proven techniques for settling the mind — taught step by step from the very beginning.</p>
+        </div>
+        <div class="welcome-item">
+          <div class="welcome-icon" aria-hidden="true">
+            <svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <path d="M13 4c0 0-9 6-9 13a9 9 0 0 0 18 0c0-7-9-13-9-13z"/>
+            </svg>
+          </div>
+          <h3>Compassion</h3>
+          <p>Training the heart through Lojong — practical tools for genuine kindness toward yourself and others.</p>
+        </div>
+        <div class="welcome-item">
+          <div class="welcome-icon" aria-hidden="true">
+            <svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <circle cx="9" cy="10" r="3"/><circle cx="17" cy="10" r="3"/>
+              <path d="M3 22c0-4 3-6 6-6h8c3 0 6 2 6 6"/>
+            </svg>
+          </div>
+          <h3>Community</h3>
+          <p>A warm, inclusive sangha where practitioners of all backgrounds are welcomed exactly as they are.</p>
+        </div>
+        <div class="welcome-item">
+          <div class="welcome-icon" aria-hidden="true">
+            <svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <rect x="3" y="5" width="20" height="16" rx="2"/>
+              <line x1="3" y1="10" x2="23" y2="10"/>
+              <line x1="8" y1="3" x2="8" y2="8"/><line x1="18" y1="3" x2="18" y2="8"/>
+            </svg>
+          </div>
+          <h3>Retreats</h3>
+          <p>From half-day sittings to multi-day residentials in the beauty of the Hudson Valley.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FEATURED PROGRAMS ═══ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Programs</span>
+        <h2 class="section-title">Current courses &amp; classes</h2>
+        <p class="section-subtitle">
+          All programmes are open to everyone, regardless of background or belief.
+          Sliding scale fees available.
+        </p>
+      </div>
+      <div class="programs-grid">
+        {featuredPrograms.map(p => (
+          <article class="card">
+            {p.data.image && (
+              <img class="card-img" src={p.data.image} alt={p.data.image_alt || p.data.title} loading="lazy" />
+            )}
+            <div class="card-body">
+              <span class="card-tag">{p.data.format}</span>
+              <h3 class="card-title">
+                <a href={withBase(`/programs/${p.id}/`)}>{p.data.title}</a>
+              </h3>
+              <p class="card-text">{p.data.description}</p>
+              <div class="card-meta">
+                {p.data.schedule && <span>🕐 {p.data.schedule}</span>}
+                {p.data.price    && <span>{p.data.price}</span>}
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+      <div class="section-footer">
+        <a href={withBase('/programs/')} class="btn btn--outline">View all programs →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ ABOUT STRIP ═══ -->
+  <section class="section about-strip">
+    <div class="container">
+      <div class="about-strip-inner">
+        <div class="about-strip-img">
+          <img
+            src="https://images.unsplash.com/photo-1593811167562-9cef47bfc4d7?w=800&q=80"
+            alt="Group sitting in meditation at Stillwater"
+            loading="lazy"
+          />
+        </div>
+        <div class="about-strip-text">
+          <span class="section-eyebrow">About Stillwater</span>
+          <h2 class="section-title">Non-sectarian, welcoming, grounded</h2>
+          <p>
+            Stillwater draws on the wisdom of multiple Buddhist traditions — Tibetan,
+            Zen, and Theravada — offering what is most helpful without demanding you
+            adopt any particular belief system.
+          </p>
+          <p>
+            Our courses share simple meditation techniques and methods for training in
+            compassion, developed over centuries yet directly relevant to the challenges
+            of everyday life: stress, anxiety, difficult relationships, and the search
+            for meaning.
+          </p>
+          <p>
+            We are based in Woodstock, NY and offer in-person programmes at our centre,
+            as well as occasional online sessions.
+          </p>
+          <a href={withBase('/about/')} class="btn btn--primary" style="margin-top:0.5rem">
+            Learn about our approach
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ UPCOMING EVENTS ═══ -->
+  {upcomingEvents.length > 0 && (
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">What's coming up</span>
+          <h2 class="section-title">Events &amp; Retreats</h2>
+        </div>
+        <div class="events-list">
+          {upcomingEvents.map(event => {
+            const d = fmtDate(new Date(event.data.date));
+            return (
+              <div class="event-item">
+                <div class="event-date">
+                  <span class="day">{d.day}</span>
+                  <span class="month">{d.month}</span>
+                </div>
+                <div class="event-info">
+                  <p class="event-tag">{typeLabel[event.data.type] ?? event.data.type}</p>
+                  <p class="event-title">{event.data.title}</p>
+                  <p class="event-meta">
+                    {event.data.location}{event.data.price ? ` · ${event.data.price}` : ''}
+                  </p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+        <div class="section-footer">
+          <a href={withBase('/events/')} class="btn btn--outline">All events →</a>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- ═══ QUOTE ═══ -->
+  <section class="quote-section">
+    <div class="container">
+      <blockquote class="quote-text">
+        "Meditation and compassion have been shown to be beneficial in many ways —
+        bringing peace of mind, tackling stress, depression and other mental health
+        challenges, and helping us develop more kindness for ourselves and those around us."
+      </blockquote>
+      <p class="quote-attribution">The Stillwater approach</p>
+    </div>
+  </section>
+
+  <!-- ═══ VISIT CTA ═══ -->
+  <section class="section section--sm visit-cta">
+    <div class="container">
+      <div class="visit-cta-inner">
+        <div>
+          <h2>Come and find us</h2>
+          <p>
+            28 River Bend Lane, Woodstock, NY 12498<br />
+            Thursday evenings are free and open to all — no booking needed.
+          </p>
+        </div>
+        <div class="visit-cta-actions">
+          <a href={withBase('/contact/')} class="btn btn--primary">Plan your visit</a>
+          <a href={withBase('/programs/drop-in-meditation/')} class="btn btn--outline">Thursday drop-in →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</Base>

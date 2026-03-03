@@ -1,0 +1,88 @@
+---
+import Page from '../layouts/Page.astro';
+import { getCollection } from 'astro:content';
+import { withBase } from '../utils/paths';
+
+const allEvents = await getCollection('events');
+const now = new Date();
+
+const upcoming = allEvents
+  .filter(e => new Date(e.data.date) >= now)
+  .sort((a, b) => new Date(a.data.date).getTime() - new Date(b.data.date).getTime());
+
+const typeLabel: Record<string, string> = {
+  retreat: 'Retreat', workshop: 'Workshop', talk: 'Talk',
+  sitting: 'Meditation', study: 'Study Group',
+};
+
+function fmt(d: Date, opts: Intl.DateTimeFormatOptions) {
+  return d.toLocaleDateString('en-US', opts);
+}
+---
+<Page
+  title="Events &amp; Retreats"
+  heroTitle="Events &amp; Retreats"
+  heroSubtitle="Deepening practice through half-days, full days, and residential retreats throughout the year."
+>
+  <section class="section">
+    <div class="container">
+
+      {upcoming.length > 0 ? (
+        <div class="events-list">
+          {upcoming.map(event => {
+            const start = new Date(event.data.date);
+            const end   = event.data.end_date ? new Date(event.data.end_date) : null;
+            const dateStr = end
+              ? `${fmt(start, { month: 'long', day: 'numeric' })}–${fmt(end, { month: 'long', day: 'numeric', year: 'numeric' })}`
+              : fmt(start, { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+            return (
+              <div class="event-item event-item--lg">
+                <div class="event-date">
+                  <span class="day">{fmt(start, { day: 'numeric' })}</span>
+                  <span class="month">{fmt(start, { month: 'short' })}</span>
+                </div>
+                <div class="event-info">
+                  <p class="event-tag">{typeLabel[event.data.type] ?? event.data.type}</p>
+                  <p class="event-title">{event.data.title}</p>
+                  <p class="event-desc">{event.data.description}</p>
+                  <p class="event-meta">
+                    {dateStr} · {event.data.location}
+                    {event.data.price ? ` · ${event.data.price}` : ''}
+                  </p>
+                </div>
+                <div class="event-action">
+                  {event.data.register_url
+                    ? <a href={event.data.register_url} class="btn btn--primary btn--sm">Register</a>
+                    : <a href={withBase('/contact/')} class="btn btn--outline btn--sm">Enquire</a>
+                  }
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      ) : (
+        <div class="no-events">
+          <p>No upcoming events scheduled. Check back soon.</p>
+          <p>
+            Our <a href={withBase('/programs/drop-in-meditation/')}>Thursday evening sitting</a> runs
+            every week and is always free and open to everyone.
+          </p>
+        </div>
+      )}
+
+    </div>
+  </section>
+</Page>
+
+<style>
+  .event-item--lg { grid-template-columns: 5rem 1fr auto; align-items: center; gap: 1.5rem; }
+  .event-desc { font-size: var(--font-size-sm); color: var(--color-text-muted); margin: 0.3rem 0 0.5rem; line-height: 1.6; }
+  .event-action { flex-shrink: 0; }
+  .btn--sm { padding: 0.4rem 1.1rem; font-size: var(--font-size-xs); white-space: nowrap; }
+  .no-events { max-width: 480px; color: var(--color-text-muted); }
+  .no-events p { font-size: var(--font-size-lg); margin-bottom: 0.75rem; }
+  @media (max-width: 640px) {
+    .event-item--lg { grid-template-columns: 4rem 1fr; }
+    .event-action { grid-column: 2; }
+  }
+</style>
