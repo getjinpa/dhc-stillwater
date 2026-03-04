@@ -2,7 +2,7 @@
 title: Introduction to Meditation
 subtitle: An 8-week foundation course
 description: Learn to settle your mind and find genuine peace. This friendly, step-by-step course introduces the core techniques of Buddhist meditation in a completely accessible way — no experience, no belief required.
-image: https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&q=80
+image: /images/photo-1506126613408-eca07ce68773.jpg
 image_alt: Person sitting in meditation in a sunlit room
 level: beginner
 format: 8-week course

@@ -1,7 +1,7 @@
 ---
 title: "Spring Retreat: Rest & Renewal"
 description: A three-day residential retreat at our centre exploring the practices of stillness, rest, and natural awareness. Suitable for those with at least some prior meditation experience.
-image: https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=80
+image: /images/photo-1441974231531-c6227db76b6e.jpg
 date: 2026-04-18
 end_date: 2026-04-20
 location: Stillwater Dharma Center

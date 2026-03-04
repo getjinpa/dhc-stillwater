@@ -2,7 +2,7 @@
 title: Thursday Evening Sitting
 subtitle: Drop-in community meditation
 description: A free weekly drop-in meditation session open to everyone. Thirty minutes of guided meditation followed by a short teaching and informal tea. No booking required — just come.
-image: https://images.unsplash.com/photo-1545389336-cf090694435e?w=800&q=80
+image: /images/photo-1545389336-cf090694435e.jpg
 image_alt: Candles and cushions in a softly lit meditation room
 level: all-levels
 format: Weekly drop-in

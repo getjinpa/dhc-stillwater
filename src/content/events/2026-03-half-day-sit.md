@@ -1,7 +1,7 @@
 ---
 title: "Half-Day Meditation: Settling the Mind"
 description: A half-day sitting session — four hours of guided and silent meditation with breaks, tea, and a short teaching. Open to anyone with basic meditation experience.
-image: https://images.unsplash.com/photo-1508672019048-805c876b67e2?w=800&q=80
+image: /images/photo-1508672019048-805c876b67e2.jpg
 date: 2026-03-28
 location: Stillwater Dharma Center
 type: sitting

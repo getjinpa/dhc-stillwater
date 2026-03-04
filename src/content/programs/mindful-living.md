@@ -2,7 +2,7 @@
 title: Mindful Living
 subtitle: Meditation for everyday life
 description: A six-week exploration of how meditation practice can transform the way we live, work, and relate. Practical, grounded, and immediately applicable to the challenges of modern life.
-image: https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&q=80
+image: /images/photo-1544367567-0f2fcb009e0b.jpg
 image_alt: Morning light through a window onto a wooden table with tea
 level: beginner
 format: 6-week course

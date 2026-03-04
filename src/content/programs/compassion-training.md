@@ -2,7 +2,7 @@
 title: The Compassionate Heart
 subtitle: Lojong — training the mind in compassion
 description: A transformative eight-week programme in the Tibetan Buddhist art of mind training. Learn to work with difficult emotions, cultivate genuine kindness, and develop the courage to open your heart to yourself and others.
-image: https://images.unsplash.com/photo-1518459031867-a89b944bffe4?w=800&q=80
+image: /images/photo-1518459031867-a89b944bffe4.jpg
 image_alt: Hands holding a small plant, symbol of nurturing
 level: all-levels
 format: 8-week course
