@@ -34,7 +34,7 @@ const typeLabel: Record<string, string> = {
   <section class="hero">
     <div class="hero-bg">
       <img
-        src="/images/photo-1441974231531-c6227db76b6e.jpg"
+        src={withBase('/images/photo-1441974231531-c6227db76b6e.jpg')}
         alt="Sunlit forest path in the Hudson Valley"
         loading="eager"
         fetchpriority="high"
@@ -120,7 +120,7 @@ const typeLabel: Record<string, string> = {
         {featuredPrograms.map(p => (
           <article class="card">
             {p.data.image && (
-              <img class="card-img" src={p.data.image} alt={p.data.image_alt || p.data.title} loading="lazy" />
+              <img class="card-img" src={withBase(p.data.image)} alt={p.data.image_alt || p.data.title} loading="lazy" />
             )}
             <div class="card-body">
               <span class="card-tag">{p.data.format}</span>
@@ -148,7 +148,7 @@ const typeLabel: Record<string, string> = {
       <div class="about-strip-inner">
         <div class="about-strip-img">
           <img
-            src="/images/photo-1593811167562-9cef47bfc4d7.jpg"
+            src={withBase('/images/photo-1593811167562-9cef47bfc4d7.jpg')}
             alt="Group sitting in meditation at Stillwater"
             loading="lazy"
           />

@@ -24,7 +24,7 @@ const levelLabel: Record<string, string> = {
         {programs.map(p => (
           <article class="card">
             {p.data.image && (
-              <img class="card-img" src={p.data.image} alt={p.data.image_alt || p.data.title} loading="lazy" />
+              <img class="card-img" src={withBase(p.data.image)} alt={p.data.image_alt || p.data.title} loading="lazy" />
             )}
             <div class="card-body">
               <span class="card-tag">{p.data.format}</span>
