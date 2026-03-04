@@ -1,4 +1,6 @@
 {
+  "demo": true,
+  "demoMessage": "Sample template — Stillwater Dharma Center is a fictional organisation",
   "site": {
     "title": "Stillwater Dharma Center",
     "description": "A non-sectarian meditation and dharma center in Woodstock, NY. Courses in meditation and compassion training open to all.",
