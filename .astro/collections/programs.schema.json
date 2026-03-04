@@ -1,0 +1,64 @@
+{
+  "$ref": "#/definitions/programs",
+  "definitions": {
+    "programs": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "subtitle": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "image_alt": {
+          "type": "string"
+        },
+        "level": {
+          "type": "string",
+          "enum": [
+            "beginner",
+            "all-levels",
+            "intermediate",
+            "advanced"
+          ],
+          "default": "all-levels"
+        },
+        "format": {
+          "type": "string"
+        },
+        "schedule": {
+          "type": "string"
+        },
+        "duration": {
+          "type": "string"
+        },
+        "price": {
+          "type": "string"
+        },
+        "featured": {
+          "type": "boolean",
+          "default": false
+        },
+        "order": {
+          "type": "number",
+          "default": 99
+        },
+        "$schema": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "title",
+        "description"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}
